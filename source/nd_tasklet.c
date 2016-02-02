@@ -205,9 +205,9 @@ void nd_tasklet_configure_and_connect_to_network(void)
         tasklet_data_ptr->sec_mode, tasklet_data_ptr->psk_sec_info.key_id, &tasklet_data_ptr->psk_sec_info);
 
     // configure scan parameters
-    arm_nwk_6lowpan_link_scan_paramameter_set(
-        tasklet_data_ptr->network_interface_id,
-        tasklet_data_ptr->channel_list, 5);
+//    arm_nwk_6lowpan_link_scan_paramameter_set(
+//        tasklet_data_ptr->network_interface_id,
+//        tasklet_data_ptr->channel_list, 5);
 
     // Configure scan options (NULL disables filter)
     arm_nwk_6lowpan_link_nwk_id_filter_for_nwk_scan(
@@ -371,7 +371,8 @@ void nd_tasklet_init(void)
 int8_t nd_tasklet_network_init(int8_t device_id)
 {
     // TODO, read interface name from configuration
-    return arm_nwk_interface_init(NET_INTERFACE_RF_6LOWPAN, device_id,
+    return arm_nwk_interface_init(NET_INTERFACE_ETHERNET, /*NET_INTERFACE_RF_6LOWPAN*/
+                                  device_id,
                                   INTERFACE_NAME);
 }
 

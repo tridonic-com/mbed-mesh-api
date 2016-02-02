@@ -212,7 +212,7 @@ void thread_tasklet_configure_and_connect_to_network(void)
     arm_nwk_6lowpan_gp_address_mode(thread_tasklet_data_ptr->nwk_if_id, NET_6LOWPAN_GP16_ADDRESS, 0xffff, 1);
 
     // Link configuration
-    thread_tasklet_data_ptr->link_config.steering_data_len = 0;
+   // thread_tasklet_data_ptr->link_config.steering_data_len = 0;
     memcpy(thread_tasklet_data_ptr->link_config.name, "Arm Powered Core", 16);
     thread_tasklet_data_ptr->link_config.panId =  THREAD_PANID;
     thread_tasklet_data_ptr->link_config.rfChannel = THREAD_RF_CHANNEL;
@@ -230,10 +230,10 @@ void thread_tasklet_configure_and_connect_to_network(void)
     thread_tasklet_data_ptr->link_config.key_rotation = 3600;
     thread_tasklet_data_ptr->link_config.key_sequence = 0;
 
-    thread_managenet_node_init(thread_tasklet_data_ptr->nwk_if_id,
-                               thread_tasklet_data_ptr->channel_list,
-                               &device_configuration,
-                               &thread_tasklet_data_ptr->link_config);
+//    thread_managenet_node_init(thread_tasklet_data_ptr->nwk_if_id,
+//                               thread_tasklet_data_ptr->channel_list,
+//                               &device_configuration,
+//                               &thread_tasklet_data_ptr->link_config);
 
     status = arm_nwk_interface_up(thread_tasklet_data_ptr->nwk_if_id);
 
@@ -350,7 +350,8 @@ void thread_tasklet_init(void)
 int8_t thread_tasklet_network_init(int8_t device_id)
 {
     // TODO, read interface name from configuration
-    return arm_nwk_interface_init(NET_INTERFACE_RF_6LOWPAN, device_id,
+    return arm_nwk_interface_init(NET_INTERFACE_ETHERNET, /*NET_INTERFACE_RF_6LOWPAN*/
+                                  device_id,
                                   INTERFACE_NAME);
 }
 
@@ -359,6 +360,6 @@ void thread_tasklet_set_device_config(uint8_t *eui64, char *pskd)
     device_configuration.PSKd_ptr = ns_dyn_mem_alloc(strlen(pskd) + 1);
     strcpy(device_configuration.PSKd_ptr, pskd);
     memcpy(device_configuration.eui64, eui64, 8);
-    device_configuration.leaderCap = true;
+  //  device_configuration.leaderCap = true;
 }
 
